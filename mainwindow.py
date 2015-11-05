@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Wed Nov  4 17:43:40 2015
+# Created: Wed Nov  4 20:38:13 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -355,7 +355,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "PBCore Editor", None))
         self.label.setText(_translate("MainWindow", "Resource ID:", None))
         self.label_2.setText(_translate("MainWindow", "Resource Title:", None))
         self.groupBox.setTitle(_translate("MainWindow", "Analog instantiation", None))
