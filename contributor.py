@@ -2,67 +2,53 @@
 
 # Form implementation generated from reading ui file 'contributor.ui'
 #
-# Created: Wed Nov  4 20:38:14 2015
-#      by: PyQt4 UI code generator 4.11.3
+# Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.setObjectName("Dialog")
         Dialog.resize(356, 141)
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
+        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(120, 100, 221, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.layoutWidget = QtGui.QWidget(Dialog)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.layoutWidget = QtWidgets.QWidget(Dialog)
         self.layoutWidget.setGeometry(QtCore.QRect(10, 20, 331, 71))
-        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget)
-        self.verticalLayout.setMargin(0)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.formLayout = QtGui.QFormLayout()
-        self.formLayout.setObjectName(_fromUtf8("formLayout"))
-        self.label = QtGui.QLabel(self.layoutWidget)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
-        self.contributor_name = QtGui.QLineEdit(self.layoutWidget)
-        self.contributor_name.setObjectName(_fromUtf8("contributor_name"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.contributor_name)
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setObjectName("formLayout")
+        self.label = QtWidgets.QLabel(self.layoutWidget)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.contributor_name = QtWidgets.QLineEdit(self.layoutWidget)
+        self.contributor_name.setObjectName("contributor_name")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.contributor_name)
         self.verticalLayout.addLayout(self.formLayout)
-        self.contributor_role = QtGui.QComboBox(self.layoutWidget)
-        self.contributor_role.setObjectName(_fromUtf8("contributor_role"))
-        self.contributor_role.addItem(_fromUtf8(""))
-        self.contributor_role.addItem(_fromUtf8(""))
-        self.contributor_role.addItem(_fromUtf8(""))
+        self.contributor_role = QtWidgets.QComboBox(self.layoutWidget)
+        self.contributor_role.setObjectName("contributor_role")
+        self.contributor_role.addItem("")
+        self.contributor_role.addItem("")
+        self.contributor_role.addItem("")
         self.verticalLayout.addWidget(self.contributor_role)
 
         self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
+        self.buttonBox.accepted.connect(Dialog.accept)
+        self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
-        self.label.setText(_translate("Dialog", "Contributor:", None))
-        self.contributor_role.setItemText(0, _translate("Dialog", "Producer", None))
-        self.contributor_role.setItemText(1, _translate("Dialog", "Speaker", None))
-        self.contributor_role.setItemText(2, _translate("Dialog", "Author", None))
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.label.setText(_translate("Dialog", "Contributor:"))
+        self.contributor_role.setItemText(0, _translate("Dialog", "Producer"))
+        self.contributor_role.setItemText(1, _translate("Dialog", "Speaker"))
+        self.contributor_role.setItemText(2, _translate("Dialog", "Author"))
 
