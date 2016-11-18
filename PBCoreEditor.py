@@ -1,14 +1,14 @@
 import sys
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
+import mainwindow
 from mainwindow import Ui_MainWindow
 from description import Ui_DescriptionDialog
 
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
-class StartQT4(QtGui.QMainWindow):
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        super(MainWindow, self).__init__(parent)
+        self.setupUi(self)
 
         ###############
         ##### set up signals/slots
@@ -23,7 +23,7 @@ class StartQT4(QtGui.QMainWindow):
 
         ##### GUI elements
 
-        self.ui.descriptionlist_plusbutton.clicked.connect(self.addDescription)
+        self.descriptionlist_plusbutton.clicked.connect(self.addDescription)
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
         # self.ui.createAuthority_button.clicked.connect(self.createAuth)
 
@@ -34,9 +34,9 @@ class StartQT4(QtGui.QMainWindow):
         else:
             return
 
-class StartDescriptionDialog(QtGui.QDialog, Ui_DescriptionDialog):
+class StartDescriptionDialog(QtWidgets.QDialog, Ui_DescriptionDialog):
     def __init__(self, parent=None):
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
 
     def getValues(self):
@@ -44,8 +44,9 @@ class StartDescriptionDialog(QtGui.QDialog, Ui_DescriptionDialog):
 
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
-    myapp = StartQT4()
-    myapp.show()
+    app = QtWidgets.QApplication(sys.argv)
+    form = MainWindow()
+    form.show()
+
     sys.exit(app.exec_())
 
