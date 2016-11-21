@@ -24,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### GUI elements
 
-        self.descriptionlist_plusbutton.clicked.connect(self.addDescription)
+        self.desc_addbutton.clicked.connect(self.addDescription)
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
         # self.ui.createAuthority_button.clicked.connect(self.createAuth)
 
