@@ -16,6 +16,7 @@
     "asset_type": [
         "Media Object",
         "Item",
+        "-----",
         "Advertisement", 
         "Album", 
         "Collection",
@@ -25,67 +26,351 @@
         "Segment",
         "Series",
         "Story"
-    ]
-        "Abstract"
-        "Anecdotal Comments & Reflections"
+    ],
+
+    "description_type": [
+        "Description"
+        "Playlist"
+        "Object"
         "Annotation"
+        "Summary"
+        "Synopsis"
+        "Abstract"
+        "-----"
+        "Anecdotal Comments & Reflections"
         "Art Work"
         "Assessment"
         "Awards"
-        "Bookmarks "
-        "Caption "
+        "Bookmarks"
+        "Caption"
         "Clip"
         "Collection"
         "Comments"
-        "Content Flags "
-        "Credit Line "
-        "Cue Words "
-        "Description "
-        "Dopesheet "
-        "DVS "
+        "Content Flags"
+        "Credit Line"
+        "Cue Words"
+        "Dopesheet"
+        "DVS"
         "Edit Decision List"
-        "Element "
+        "Element"
         "Ensemble"
-        "Episode   "
+        "Episode"
         "Evaluation"
-        "Event "
-        "Excerpt   "
-        "Headline  "
+        "Event"
+        "Excerpt"
+        "Headline"
         "Highlights"
-        "Instructions  "
-        "Item  "
+        "Instructions"
+        "Item"
         "Key Points"
-        "Keyword   "
-        "Listing Services  "
-        "Log   "
-        "Model "
-        "Movement  "
+        "Keyword"
+        "Listing Services"
+        "Log"
+        "Model"
+        "Movement"
         "Number"
-        "Object"
-        "Outline   "
-        "Package   "
-        "Playlist  "
-        "PODS  "
-        "Process "
-        "Program "
-        "Project "
-        "Promotional "
-        "Public "
-        "Purpose "
-        "Review "
-        "Rundown "
-        "Script "
-        "Segment "
-        "Selection "
-        "Sequence "
-        "Series "
-        "Shot List "
-        "Speech-to-text "
-        "Story "
-        "Subtitles "
-        "Summary "
-        "Synopsis "
-         "Table of Contents "
-    "Text-to-speech "
-    "Theme "
+        "Outline"
+        "Package"
+        "PODS"
+        "Process"
+        "Program"
+        "Project"
+        "Promotional"
+        "Public"
+        "Purpose"
+        "Review"
+        "Rundown"
+        "Script"
+        "Segment"
+        "Selection"
+        "Sequence"
+        "Series"
+        "Shot List"
+        "Speech-to-text"
+        "Story"
+        "Subtitles"
+        "Table of Contents"
+        "Text-to-speech"
+        "Theme"
+    ],
+
+    "creator_type": [
+        "Actor",
+        "Advisor",
+        "Anchor",
+        "Announcer",
+        "Arranger",
+        "Artist",
+        "Assistant Camera Operator",
+        "Assistant Director",
+        "Assistant Editor",
+        "Assistant Producer",
+        "Assistant Researcher",
+        "Assistant Stage Manager",
+        "Assistant to the Producer",
+        "Assistant Unit Manager",
+        "Associate Director",
+        "Associate Producer",
+        "Audio",
+        "Audio Assistant",
+        "Audio Editor",
+        "Audio Engineer",
+        "Audio Mixer",
+        "Author",
+        "Boom Operator",
+        "Broadcast Engineer",
+        "Camera Assistant",
+        "Camera Operator",
+        "Captions",
+        "Casting",
+        "Chief Camera Operator",
+        "Cinematographer",
+        "Commentary Editor",
+        "Commentator",
+        "Community Coordinator",
+        "Composer",
+        "Concept",
+        "Conductor",
+        "Co-Producer",
+        "Crane",
+        "Designer",
+        "Describer",
+        "Developer",
+        "Director",
+        "Director: Artistic",
+        "Director: Dance",
+        "Director: Documentary Material",
+        "Director: Photography",
+        "Director: Segment",
+        "Edit Programmer",
+        "Editor",
+        "Editor: Graphics",
+        "Editor: Segment",
+        "Editorial Director",
+        "Engineer",
+        "Essayist",
+        "Executive Producer",
+        "Fashion Consultant",
+        "Field Producer",
+        "Film Editor",
+        "Film Sound",
+        "Filmmaker",
+        "Floor Manager",
+        "Funder",
+        "Gaffer",
+        "Graphic Designer",
+        "Graphics",
+        "Guest",
+        "Host",
+        "Illustrator",
+        "Instrumentalist",
+        "Intern",
+        "Interpreter",
+        "Interviewee",
+        "Interviewer",
+        "Lecturer",
+        "Lighting",
+        "Lighting Assistant",
+        "Lighting Director",
+        "Make-Up",
+        "Manager",
+        "Mobile Unit Supervisor",
+        "Moderator",
+        "Music Assistant",
+        "Music Coordinator",
+        "Music Director",
+        "Musical Staging",
+        "Musician",
+        "Narrator",
+        "News Director",
+        "Panelist",
+        "Performer",
+        "Performing Group",
+        "Photographer",
+        "Post-production Audio",
+        "Post-production Supervisor",
+        "Producer",
+        "Producer: Segment",
+        "Producer: Website",
+        "Producer: Coordinating",
+        "Production Assistant",
+        "Production Manager",
+        "Production Personnel",
+        "Production Secretary",
+        "Production Unit",
+        "Project Director",
+        "Publicist",
+        "Reader",
+        "Recording engineer",
+        "Recordist",
+        "Reporter",
+        "Researcher",
+        "Scenic Design",
+        "Series Producer",
+        "Senior Broadcast Engineer",
+        "Senior Editor",
+        "Senior Producer",
+        "Senior Researcher",
+        "Sound",
+        "Sound Mix",
+        "Speaker",
+        "Sponsor",
+        "Staff Volunteer",
+        "Stage Manager",
+        "Still Photography",
+        "Studio Technician",
+        "Subject",
+        "Switcher",
+        "Synthesis",
+        "Synthesis Musician",
+        "Talent Coordinator",
+        "Technical Consultant",
+        "Technical Director",
+        "Technical Production",
+        "Theme Music",
+        "Titlist",
+        "Translator",
+        "Unit Manager",
+        "Video",
+        "Videotape Assembly",
+        "Videotape Editor",
+        "Videotape Engineer",
+        "Videotape Recordist",
+        "Vidifont Operator",
+        "Vocalist",
+        "VTR Recordist",
+        "Wardrobe",
+        "Writer"
+    ],
+
+    "date_type": [
+        "availableEnd",
+        "availableStart",
+        "broadcast",
+        "content",
+        "created",
+        "date time stamp",
+        "issued",
+        "portrayed",
+        "published",
+        "revised"
+    ],
+
+    "title_type": [
+        "Abridged",
+        "Activity",
+        "Advertisement",
+        "Album",
+        "Alternative",
+        "Alternative Main",
+        "Alternative Secondary",
+        "Alternative Working",
+        "Ambient sound",
+        "Animation",
+        "Art Work",
+        "Art Work Original",
+        "Article",
+        "Artifact",
+        "Blueprint",
+        "Book",
+        "Caption File",
+        "Chapter",
+        "Chart",
+        "Class",
+        "Clip",
+        "Collection",
+        "Composition",
+        "Container",
+        "Dataset",
+        "Descriptive Audio",
+        "Diagram",
+        "Document",
+        "Documentary",
+        "Drawing",
+        "Drill and Practice",
+        "Element",
+        "Episode",
+        "Essay",
+        "Evaluation",
+        "Event",
+        "Excerpt",
+        "File",
+        "Framework",
+        "Franchise",
+        "Full",
+        "Game",
+        "Graphic",
+        "Image",
+        "Ingest",
+        "Interactive",
+        "International",
+        "Interstitial",
+        "Issue",
+        "Item",
+        "Kiosk Event",
+        "Label",
+        "Lesson Plan",
+        "Long",
+        "Lyrics",
+        "Main",
+        "Manuscript",
+        "Map",
+        "Model",
+        "Model Building",
+        "Module",
+        "Music",
+        "Object",
+        "Original",
+        "Package",
+        "Painting",
+        "Periodical",
+        "Photograph",
+        "Picture",
+        "Pilot",
+        "Pledged",
+        "Postcard",
+        "Poster",
+        "Presentation",
+        "Program",
+        "Project",
+        "Promo",
+        "PSA",
+        "Pseudo",
+        "Published",
+        "QSL Card",
+        "Quiz",
+        "Re-Title",
+        "Role Play",
+        "Scene",
+        "Score",
+        "Season",
+        "Secondary",
+        "Segment",
+        "Selection",
+        "Series",
+        "Service",
+        "Short",
+        "Shot",
+        "Simulation",
+        "Slide Show",
+        "Software",
+        "Song",
+        "Study Guide",
+        "Sub-series",
+        "Subtitle",
+        "Supplied",
+        "Syllabus",
+        "Teacher's Guide",
+        "Test",
+        "Track",
+        "Trailer",
+        "Transcript",
+        "Translation",
+        "Transmission",
+        "Version",
+        "Voice",
+        "Web page",
+        "Web site",
+        "Working"
+    ]
 }
