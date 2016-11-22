@@ -8,11 +8,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_DescriptionDialog(object):
-    def setupUi(self, DescriptionDialog):
-        DescriptionDialog.setObjectName("DescriptionDialog")
-        DescriptionDialog.resize(326, 438)
-        self.layoutWidget = QtWidgets.QWidget(DescriptionDialog)
+class Ui_GenericInputbox(object):
+    def setupUi(self, GenericInputbox):
+        GenericInputbox.setObjectName("GenericInputbox")
+        GenericInputbox.resize(326, 438)
+        self.layoutWidget = QtWidgets.QWidget(GenericInputbox)
         self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 301, 421))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
@@ -33,12 +33,12 @@ class Ui_DescriptionDialog(object):
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
-        self.retranslateUi(DescriptionDialog)
-        self.buttonBox.accepted.connect(DescriptionDialog.accept)
-        self.buttonBox.rejected.connect(DescriptionDialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(DescriptionDialog)
+        self.retranslateUi(GenericInputbox)
+        self.buttonBox.accepted.connect(GenericInputbox.DescriptionDialog.accept)
+        self.buttonBox.rejected.connect(GenericInputbox.DescriptionDialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(GenericInputbox)
 
-    def retranslateUi(self, DescriptionDialog):
+    def retranslateUi(self, GenericInputbox):
         _translate = QtCore.QCoreApplication.translate
-        DescriptionDialog.setWindowTitle(_translate("DescriptionDialog", "Description"))
+        GenericInputbox.setWindowTitle(_translate("GenericInputbox", "Description"))
 

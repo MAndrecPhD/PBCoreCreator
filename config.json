@@ -1,0 +1,91 @@
+{
+    "agent": [
+        "Doe, John",
+        "Melnyk, Bohdan"
+    ],
+
+    "language": [
+        {"Ukrainian": "ukr"},
+        {"English": "eng"},
+        {"Russian": "rus"},
+        {"Polish": "pol"},
+        {"German": "deu"},
+        {"Portuguese": "por"}
+    ],
+
+    "asset_type": [
+        "Media Object",
+        "Item",
+        "Advertisement", 
+        "Album", 
+        "Collection",
+        "Event",
+        "Program",
+        "Season",
+        "Segment",
+        "Series",
+        "Story"
+    ]
+        "Abstract"
+        "Anecdotal Comments & Reflections"
+        "Annotation"
+        "Art Work"
+        "Assessment"
+        "Awards"
+        "Bookmarks "
+        "Caption "
+        "Clip"
+        "Collection"
+        "Comments"
+        "Content Flags "
+        "Credit Line "
+        "Cue Words "
+        "Description "
+        "Dopesheet "
+        "DVS "
+        "Edit Decision List"
+        "Element "
+        "Ensemble"
+        "Episode   "
+        "Evaluation"
+        "Event "
+        "Excerpt   "
+        "Headline  "
+        "Highlights"
+        "Instructions  "
+        "Item  "
+        "Key Points"
+        "Keyword   "
+        "Listing Services  "
+        "Log   "
+        "Model "
+        "Movement  "
+        "Number"
+        "Object"
+        "Outline   "
+        "Package   "
+        "Playlist  "
+        "PODS  "
+        "Process "
+        "Program "
+        "Project "
+        "Promotional "
+        "Public "
+        "Purpose "
+        "Review "
+        "Rundown "
+        "Script "
+        "Segment "
+        "Selection "
+        "Sequence "
+        "Series "
+        "Shot List "
+        "Speech-to-text "
+        "Story "
+        "Subtitles "
+        "Summary "
+        "Synopsis "
+         "Table of Contents "
+    "Text-to-speech "
+    "Theme "
+}
