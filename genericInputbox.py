@@ -34,8 +34,8 @@ class Ui_GenericInputbox(object):
         self.verticalLayout.addWidget(self.buttonBox)
 
         self.retranslateUi(GenericInputbox)
-        self.buttonBox.accepted.connect(GenericInputbox.DescriptionDialog.accept)
-        self.buttonBox.rejected.connect(GenericInputbox.DescriptionDialog.reject)
+        self.buttonBox.accepted.connect(GenericInputbox.accept)
+        self.buttonBox.rejected.connect(GenericInputbox.reject)
         QtCore.QMetaObject.connectSlotsByName(GenericInputbox)
 
     def retranslateUi(self, GenericInputbox):
