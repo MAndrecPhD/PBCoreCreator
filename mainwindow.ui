@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="descMD">
      <attribute name="title">
@@ -36,7 +36,7 @@
         <x>10</x>
         <y>490</y>
         <width>338</width>
-        <height>131</height>
+        <height>149</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -126,14 +126,14 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QToolButton" name="desc_addbutton">
+          <widget class="QToolButton" name="description_addbutton">
            <property name="text">
             <string>Add</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="desc_removebutton">
+          <widget class="QToolButton" name="description_removebutton">
            <property name="text">
             <string>Remove</string>
            </property>
@@ -163,7 +163,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="desc_downbutton">
+          <widget class="QPushButton" name="description_downbutton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -182,7 +182,7 @@
         <x>10</x>
         <y>180</y>
         <width>338</width>
-        <height>131</height>
+        <height>149</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -255,7 +255,7 @@
         <x>10</x>
         <y>340</y>
         <width>338</width>
-        <height>131</height>
+        <height>149</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -328,7 +328,7 @@
         <x>380</x>
         <y>440</y>
         <width>338</width>
-        <height>131</height>
+        <height>149</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -395,7 +395,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -454,13 +454,10 @@
      </widget>
      <zorder>layoutWidget</zorder>
      <zorder>layoutWidget</zorder>
-     <zorder>identifier</zorder>
-     <zorder>formLayoutWidget</zorder>
-     <zorder>asset_type</zorder>
+     <zorder>layoutWidget</zorder>
      <zorder>layoutWidget_2</zorder>
      <zorder>layoutWidget_3</zorder>
      <zorder>layoutWidget_4</zorder>
-     <zorder>formLayoutWidget_2</zorder>
     </widget>
     <widget class="QWidget" name="rightsMD">
      <attribute name="title">

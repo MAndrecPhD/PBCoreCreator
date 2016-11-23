@@ -11,9 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_GenericInputbox(object):
     def setupUi(self, GenericInputbox):
         GenericInputbox.setObjectName("GenericInputbox")
-        GenericInputbox.resize(326, 438)
+        GenericInputbox.resize(616, 438)
         self.layoutWidget = QtWidgets.QWidget(GenericInputbox)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 301, 421))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 591, 421))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)

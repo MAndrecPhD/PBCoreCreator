@@ -4,6 +4,8 @@ import mainwindow
 from mainwindow import Ui_MainWindow
 from genericInputbox import Ui_GenericInputbox
 
+config = None
+
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
@@ -17,19 +19,45 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### menu items
 
-        # self.ui.actionRun_matching.triggered.connect(self.runMatching)
-        # self.ui.actionExport_CSV.triggered.connect(self.exportCSV)
-        # self.ui.actionPreferences.triggered.connect(self.setPreferences)
-        # self.ui.actionQuit.triggered.connect(QtCore.QCoreApplication.instance().quit)
+        # self.ui.actionWhat.triggered.connect(self.what)
 
         ##### GUI elements
 
-        self.desc_addbutton.clicked.connect(lambda: self.genericInputbox("description"))
+        self.description_addbutton.clicked.connect(lambda: self.genericInputbox("description"))
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
-        # self.ui.createAuthority_button.clicked.connect(self.createAuth)
 
     def genericInputbox(self, type):
-        dlg = StartGenericInputbox(type) 
+        from itertools import groupby
+
+        dlg = StartGenericInputbox(type)
+
+        all_attributes = config[type]["values"]
+
+        # deal with end delimiter
+        attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
+
+        # deal with separators
+        attributes = [list(group) for k, group in groupby(attributes, lambda x: x == "-") if not k]
+        attributes = attributes[::-1]
+
+        this_list = attributes.pop()
+        dlg.attribute.addItems(this_list)
+
+        while (len(attributes) > 0):
+            dlg.attribute.insertSeparator(dlg.attribute.count())
+            this_list = attributes.pop()
+            dlg.attribute.addItems(this_list)
+
+        # dlg.attribute.addItems(attributes[1])
+        # dlg.attribute.addItems(attributes[0])
+
+        # dlg.attribute.addItems(attributes)
+
+        if ("presets" in config[type]):
+            dlg.preset.addItems(config[type]["presets"])
+        else:
+            dlg.preset.setEnabled(False) # would be nicer if it just vanished...
+
         if dlg.exec_(): 
             match_method = dlg.getValues() 
         else:
@@ -45,6 +73,11 @@ class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
 
 
 if __name__ == "__main__":
+    import json
+
+    with open('config.json') as data_file:    
+        config = json.load(data_file)
+
     app = QtWidgets.QApplication(sys.argv)
     form = MainWindow()
     form.show()
