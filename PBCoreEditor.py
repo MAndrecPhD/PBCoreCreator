@@ -1,17 +1,25 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-import mainwindow
 from mainwindow import Ui_MainWindow
 from genericInputbox import Ui_GenericInputbox
 
 config = None
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
+
+        self.widget_adapter = {
+            "title": self.title_list,
+            "description": self.description_list,
+            "date": self.date_list,
+            "creator": self.creator_list,
+            "publisher": self.publisher_list,
+            "contributor": self.contributor_list,
+            "rights": self.rights_list
+        }
 
         ###############
         ##### set up signals/slots
@@ -27,6 +35,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.title_addbutton.clicked.connect(lambda: self.genericInputbox("title"))
         self.date_addbutton.clicked.connect(lambda: self.genericInputbox("date"))
         self.coverage_addbutton.clicked.connect(lambda: self.genericInputbox("coverage"))
+        self.creator_addbutton.clicked.connect(lambda: self.genericInputbox("creator"))
+        self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox("publisher"))
+        self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox("contributor"))
+        self.rights_addbutton.clicked.connect(lambda: self.genericInputbox("rights"))
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
     def genericInputbox(self, type):
@@ -51,11 +63,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             this_list = attributes.pop()
             dlg.attribute.addItems(this_list)
 
-        # dlg.attribute.addItems(attributes[1])
-        # dlg.attribute.addItems(attributes[0])
-
-        # dlg.attribute.addItems(attributes)
-
         if ("presets" in config[type]):
             dlg.preset.addItems(config[type]["presets"])
         else:
@@ -63,7 +70,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if dlg.exec_(): 
             input = dlg.getValues() 
-            self.description_list.addItem("({}) {}".format(input["attribute"], input["text"]))
+            self.widget_adapter[type].addItem("({}) {}".format(input["attribute"], input["text"]))
         else:
             return
 
