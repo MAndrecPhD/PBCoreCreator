@@ -24,6 +24,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##### GUI elements
 
         self.description_addbutton.clicked.connect(lambda: self.genericInputbox("description"))
+        self.title_addbutton.clicked.connect(lambda: self.genericInputbox("title"))
+        self.date_addbutton.clicked.connect(lambda: self.genericInputbox("date"))
+        self.coverage_addbutton.clicked.connect(lambda: self.genericInputbox("coverage"))
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
     def genericInputbox(self, type):
@@ -59,7 +62,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             dlg.preset.setEnabled(False) # would be nicer if it just vanished...
 
         if dlg.exec_(): 
-            match_method = dlg.getValues() 
+            input = dlg.getValues() 
+            self.description_list.addItem("({}) {}".format(input["attribute"], input["text"]))
         else:
             return
 
@@ -69,7 +73,7 @@ class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
         self.setupUi(self)
 
     def getValues(self):
-        return 1
+        return {"attribute": str(self.attribute.currentText()), "text": self.text.toPlainText()}
 
 
 if __name__ == "__main__":
