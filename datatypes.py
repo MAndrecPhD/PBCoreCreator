@@ -1,19 +1,20 @@
-class Pbcore_Description(None):
-    def __init__(self):
-        pass
+class PBcoreElement(None):
+    def __init__(self, attribute, text):
+        self.attribute = attribute
+        self.text = text
+        self.display = "[{}] {}".format(attribute, text.replace('\n', ' ').replace('\r', ''))
 
-    def placeholder(self):
-        pass
+class PBcoreDescription(PBcoreElement):
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
 
-
-
-class Pbcore_Contributor(None):
+class PBcore_Contributor(None):
     pass
 
 
-class Pbcore_AnalogPremis(None):
+class PBcore_AnalogPremis(None):
     pass
 
 
-class Pbcore_DigitalInst(None):
+class PBcore_DigitalInst(None):
     pass
