@@ -1,23 +1,23 @@
 {
     "agent": [
-        "Doe, John",
-        "Melnyk, Bohdan"
+        "Doe, Brandon",
+        "Doe, Trixie"
     ],
 
     "language": [
-        {"Ukrainian": "ukr"},
-        {"English": "eng"},
-        {"Russian": "rus"},
-        {"Polish": "pol"},
-        {"German": "deu"},
-        {"Portuguese": "por"}
+        "Ukrainian",
+        "English",
+        "Russian",
+        "Polish",
+        "German",
+        "Portuguese"
     ],
 
     "asset_type": {
         "values": [
-            "Media Object",
             "Item",
-            "-",
+            "Media Object",
+            "#",
             "Advertisement", 
             "Album", 
             "Collection",
@@ -33,21 +33,20 @@
     "description": {
         "values": [
             "Description",
+            "Object",
             "Playlist",
             "Collection",
             "Evaluation",
-            "Item",
             "Summary",
-            "Abstract",
             "-",
             "Anecdotal Comments & Reflections",
             "Annotation",
-            "Assessment",
-            "Collection",
             "Comments",
             "Review",
             "#",
+            "Abstract",
             "Art Work",
+            "Assessment",
             "Awards",
             "Bookmarks",
             "Caption",
@@ -66,6 +65,7 @@
             "Headline",
             "Highlights",
             "Instructions",
+            "Item",
             "Key Points",
             "Keyword",
             "Listing Services",
@@ -73,7 +73,6 @@
             "Model",
             "Movement",
             "Number",
-            "Object",
             "Outline",
             "Package",
             "PODS",
@@ -102,10 +101,27 @@
 
     "creator": {
         "values": [
-            "Actor",
-            "Advisor",
             "Anchor",
             "Announcer",
+            "Commentator",
+            "Composer",
+            "Conductor",
+            "Guest",
+            "Host",
+            "Interviewee",
+            "Interviewer",
+            "Lecturer",
+            "Musician",
+            "Narrator",
+            "Performer",
+            "Performing Group",
+            "Reader",
+            "Recordist",
+            "Reporter",
+            "Speaker",
+			"#",
+            "Actor",
+            "Advisor",
             "Arranger",
             "Artist",
             "Assistant Camera Operator",
@@ -133,11 +149,8 @@
             "Chief Camera Operator",
             "Cinematographer",
             "Commentary Editor",
-            "Commentator",
             "Community Coordinator",
-            "Composer",
             "Concept",
-            "Conductor",
             "Co-Producer",
             "Crane",
             "Designer",
@@ -167,15 +180,10 @@
             "Gaffer",
             "Graphic Designer",
             "Graphics",
-            "Guest",
-            "Host",
             "Illustrator",
             "Instrumentalist",
             "Intern",
             "Interpreter",
-            "Interviewee",
-            "Interviewer",
-            "Lecturer",
             "Lighting",
             "Lighting Assistant",
             "Lighting Director",
@@ -187,12 +195,8 @@
             "Music Coordinator",
             "Music Director",
             "Musical Staging",
-            "Musician",
-            "Narrator",
             "News Director",
             "Panelist",
-            "Performer",
-            "Performing Group",
             "Photographer",
             "Post-production Audio",
             "Post-production Supervisor",
@@ -207,10 +211,7 @@
             "Production Unit",
             "Project Director",
             "Publicist",
-            "Reader",
             "Recording engineer",
-            "Recordist",
-            "Reporter",
             "Researcher",
             "Scenic Design",
             "Series Producer",
@@ -220,7 +221,6 @@
             "Senior Researcher",
             "Sound",
             "Sound Mix",
-            "Speaker",
             "Sponsor",
             "Staff Volunteer",
             "Stage Manager",
@@ -253,14 +253,15 @@
 
     "date": {
         "values": [
-            "availableEnd",
-            "availableStart",
             "broadcast",
             "content",
             "created",
+            "portrayed",
+			"#",
+            "availableEnd",
+            "availableStart",
             "date time stamp",
             "issued",
-            "portrayed",
             "published",
             "revised"
         ]
@@ -269,6 +270,12 @@
     "title": {
         "values": [
             "Abridged",
+            "Full",
+            "Main",
+            "Original",
+            "Short",
+            "Supplied",
+			"#",
             "Activity",
             "Advertisement",
             "Album",
@@ -308,7 +315,6 @@
             "File",
             "Framework",
             "Franchise",
-            "Full",
             "Game",
             "Graphic",
             "Image",
@@ -323,7 +329,6 @@
             "Lesson Plan",
             "Long",
             "Lyrics",
-            "Main",
             "Manuscript",
             "Map",
             "Model",
@@ -331,7 +336,6 @@
             "Module",
             "Music",
             "Object",
-            "Original",
             "Package",
             "Painting",
             "Periodical",
@@ -360,7 +364,6 @@
             "Selection",
             "Series",
             "Service",
-            "Short",
             "Shot",
             "Simulation",
             "Slide Show",
@@ -369,7 +372,6 @@
             "Study Guide",
             "Sub-series",
             "Subtitle",
-            "Supplied",
             "Syllabus",
             "Teacher's Guide",
             "Test",
@@ -383,6 +385,28 @@
             "Web page",
             "Web site",
             "Working"
+        ]
+    },
+
+    "coverage": {
+        "values": [
+            "Spatial",
+            "Temporal"
+        ]
+    },
+
+    "publisher": {
+        "values": [
+            "Copyright Holder",    
+            "Distributor",
+            "Presenter",
+            "Publisher",
+            "Release Agent"
+        ]
+    },
+
+    "rights": {
+        "preset": [
         ]
     }
 }
