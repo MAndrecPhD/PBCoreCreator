@@ -1,10 +1,10 @@
 
-class PBcoreElement(None):
+class PBcoreElement:
     def __init__(self, attribute, text):
         self.attribute = attribute
         self.text = text
         self.display = "[{}] {}".format(attribute, text.replace('\n', ' ').replace('\r', ''))
-        self.display = (self.display[:20] + '...') if len(self.display) > 20 else self.display
+        self.display = (self.display[:45] + '...') if len(self.display) > 45 else self.display
 
     def __str__(self):
         return self.display
@@ -57,7 +57,7 @@ class PBcoreContributor(PBcoreElement):
     def makeXML():
         pass
 
-class PBcoreTitle(PBcoreElement):
+class PBcoreCoverage(PBcoreElement):
     allobj = []
     def __init__(self, attribute, text):
         super().__init__(attribute, text)
@@ -65,30 +65,20 @@ class PBcoreTitle(PBcoreElement):
     def makeXML():
         pass
 
+### language
 
-"title": self.title_list,
-            "description": self.description_list,
-            "date": self.date_list,
-            "creator": self.creator_list,
-            "publisher": self.publisher_list,
-            "contributor": self.contributor_list,
-            "rights": self.rights_list
+### rights
 
-
-
-class PBcore_AnalogPremis(None):
+class PBcore_AnalogPremis:
     def __init__(self):
         pass
 
-class PBCore_DigitalPremis(None):
+class PBCore_DigitalPremis:
     def __init__(self):
         pass
 
 
-class PBcore_DigitalInst(None):
+class PBcore_DigitalInst:
     def __init__(self):
         pass
-
-
-# need translation table for language names
 

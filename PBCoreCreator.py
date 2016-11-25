@@ -1,4 +1,5 @@
 import sys
+from PBCoreElements import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from mainwindow import Ui_MainWindow
 from genericInputbox import Ui_GenericInputbox
@@ -32,16 +33,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##### GUI elements
 
         ## "add" buttons
-        self.description_addbutton.clicked.connect(lambda: self.genericInputbox("description", self.description_list, ))
-        self.title_addbutton.clicked.connect(lambda: self.genericInputbox("title"))
-        self.coverage_addbutton.clicked.connect(lambda: self.genericInputbox("coverage"))
-        self.creator_addbutton.clicked.connect(lambda: self.genericInputbox("creator"))
-        self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox("creator")) # reuse the list
-        self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox("publisher"))
+        self.description_addbutton.clicked.connect(
+            lambda: self.genericInputbox("description", self.description_list, PBcoreDescription))
+        self.title_addbutton.clicked.connect(
+            lambda: self.genericInputbox("title", self.title_list, PBcoreTitle))
+        self.date_addbutton.clicked.connect(
+            lambda: self.genericInputbox("date", self.date_list, PBcoreDate))
+        self.coverage_addbutton.clicked.connect(
+            lambda: self.genericInputbox("coverage", self.coverage_list, PBcoreCoverage))
+        self.creator_addbutton.clicked.connect(
+            lambda: self.genericInputbox("creator", self.creator_list, PBcoreCreator))
+        self.contributor_addbutton.clicked.connect(
+            lambda: self.genericInputbox("creator", self.contributor_list, PBcoreContributor))
+        self.publisher_addbutton.clicked.connect(
+            lambda: self.genericInputbox("publisher", self.publisher_list, PBcorePublisher))
 
         # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
-        self.date_addbutton.clicked.connect(lambda: self.genericInputbox("date"))
-        self.rights_addbutton.clicked.connect(lambda: self.genericInputbox("rights"))
+        # language
+        # rights
 
 
         ## "remove" buttons
@@ -52,7 +61,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
-    def genericInputbox(self, type):
+    def genericInputbox(self, type, listbox, dataclass):
         from itertools import groupby
 
         dlg = StartGenericInputbox(type)
@@ -74,14 +83,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             this_list = attributes.pop()
             dlg.attribute.addItems(this_list)
 
-        if ("presets" in config[type]):  # don't need this...
-            dlg.preset.addItems(config[type]["presets"])
-        else:
-            dlg.preset.setEnabled(False) # would be nicer if it just vanished...
-
-        if dlg.exec_(): 
-            input = dlg.getValues() 
-            self.widget_adapter[type].addItem("({}) {}".format(input["attribute"], input["text"]))
+        if dlg.exec_():
+            input = dlg.getValues()
+            data = dataclass(input["attribute"], input["text"])
+            listbox.addItem(str(data))
         else:
             return
 
