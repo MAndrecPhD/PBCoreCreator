@@ -12,16 +12,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
-        self.widget_adapter = {  # MOVE THESE TO SIGNAL/SLOT SETUP
-            "title": self.title_list,
-            "description": self.description_list,
-            "date": self.date_list,
-            "creator": self.creator_list,
-            "publisher": self.publisher_list,
-            "contributor": self.contributor_list,
-            "rights": self.rights_list
-        }
-
         ###############
         ##### set up signals/slots
         ###############
@@ -51,7 +41,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
         # language
         # rights
-
 
         ## "remove" buttons
         ### ????
