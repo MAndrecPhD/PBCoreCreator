@@ -13,6 +13,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.menuBar.setNativeMenuBar(False)
 
         self.titles = PBcoreTitle(config["title"]["values"], self.title_list)
+        self.descriptions = PBcoreDescription(config["description"]["values"], self.description_list)
+        self.dates = PBcoreDate(config["date"]["values"], self.date_list)
+        self.coverages = PBcoreCoverage(config["coverage"]["values"], self.coverage_list)
+        self.creators = PBcoreCreator(config["creator"]["values"], self.creator_list)
+        self.contributors = PBcoreContributor(config["creator"]["values"], self.contributor_list)
+        self.publishers = PBcorePublisher(config["publisher"]["values"], self.publisher_list)
 
         ###############
         ##### set up signals/slots
@@ -25,21 +31,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##### GUI elements
 
         ## "add" buttons
-        self.title_addbutton.clicked.connect(
-            lambda: self.genericInputbox(self.titles))
-
-        # self.description_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("description", self.description_list, PBcoreDescription))
-        # self.date_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("date", self.date_list, PBcoreDate))
-        # self.coverage_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("coverage", self.coverage_list, PBcoreCoverage))
-        # self.creator_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("creator", self.creator_list, PBcoreCreator))
-        # self.contributor_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("creator", self.contributor_list, PBcoreContributor))
-        # self.publisher_addbutton.clicked.connect(
-        #     lambda: self.genericInputbox("publisher", self.publisher_list, PBcorePublisher))
+        self.title_addbutton.clicked.connect(lambda: self.genericInputbox(self.titles))
+        self.description_addbutton.clicked.connect(lambda: self.genericInputbox(self.descriptions))
+        self.date_addbutton.clicked.connect(lambda: self.genericInputbox(self.dates))
+        self.coverage_addbutton.clicked.connect(lambda: self.genericInputbox(self.coverages))
+        self.creator_addbutton.clicked.connect(lambda: self.genericInputbox(self.creators))
+        self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox(self.contributors))
+        self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
 
         # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
         # language

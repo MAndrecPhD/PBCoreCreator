@@ -26,57 +26,53 @@ class PBcoreTitle(PBcoreList):
     def makeXML():
         pass
 
-# class PBcoreDescription(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcoreDescription(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-# class PBcoreDate(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcoreDate(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-# class PBcoreCreator(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcoreCreator(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-# class PBcorePublisher(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcorePublisher(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-# class PBcoreContributor(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcoreContributor(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-# class PBcoreCoverage(PBcoreElement):
-#     allobj = []
-#     def __init__(self, attribute, text):
-#         super().__init__(attribute, text)
+class PBcoreCoverage(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
-#     def makeXML():
-#         pass
+    def makeXML():
+        pass
 
-### language
+class PBcoreLanguage:
+    pass
 
-### rights
+class PBcoreRights:
+    pass
 
 class PBcore_AnalogPremis:
     def __init__(self):
