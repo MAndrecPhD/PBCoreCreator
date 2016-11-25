@@ -1,28 +1,78 @@
+
 class PBcoreElement(None):
     def __init__(self, attribute, text):
         self.attribute = attribute
         self.text = text
         self.display = "[{}] {}".format(attribute, text.replace('\n', ' ').replace('\r', ''))
+        self.display = (self.display[:20] + '...') if len(self.display) > 20 else self.display
 
-    # custom print method
+    def __str__(self):
+        return self.display
 
-
-# OR just make a GenericPBcoreElement with an argument indicating what it is:
-#       class GenericPBcoreElement(None):
-#           def __init__(self, type, attribute, text)
-#
-# and use it for everything except language and rights
-
-class PBcoreDescription(PBcoreElement):
+class PBcoreTitle(PBcoreElement):
+    allobj = []
     def __init__(self, attribute, text):
         super().__init__(attribute, text)
 
     def makeXML():
         pass
 
-class PBcore_Contributor(PBcoreElement):
+class PBcoreDescription(PBcoreElement):
+    allobj = []
     def __init__(self, attribute, text):
         super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+class PBcoreDate(PBcoreElement):
+    allobj = []
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+class PBcoreCreator(PBcoreElement):
+    allobj = []
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+class PBcorePublisher(PBcoreElement):
+    allobj = []
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+class PBcoreContributor(PBcoreElement):
+    allobj = []
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+class PBcoreTitle(PBcoreElement):
+    allobj = []
+    def __init__(self, attribute, text):
+        super().__init__(attribute, text)
+
+    def makeXML():
+        pass
+
+
+"title": self.title_list,
+            "description": self.description_list,
+            "date": self.date_list,
+            "creator": self.creator_list,
+            "publisher": self.publisher_list,
+            "contributor": self.contributor_list,
+            "rights": self.rights_list
 
 
 
