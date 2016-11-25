@@ -23,8 +23,11 @@ class PBcoreTitle(PBcoreList):
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
-    def makeXML():
-        pass
+    def makeXML(self):
+        out = ""
+        for a in self:
+            out += '<pbcoreTitle titleType="{}">{}</pbcoreTitle>'.format(a.attribute, a.text)
+        return(out)
 
 class PBcoreDescription(PBcoreList):
     def __init__(self, options, list_element):

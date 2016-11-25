@@ -54,7 +54,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
     def debugdump(self, listobj):
-        print(len(listobj))
+        print(listobj.makeXML())
 
     def genericInputbox(self, listobj):
         from itertools import groupby
