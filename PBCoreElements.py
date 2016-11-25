@@ -1,3 +1,4 @@
+from collections import UserList
 
 class PBcoreElement:
     def __init__(self, attribute, text):
@@ -9,61 +10,69 @@ class PBcoreElement:
     def __str__(self):
         return self.display
 
-class PBcoreTitle(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+class PBcoreList(UserList):
+    def __init__(self, options, list_element, initial_list=[]):
+        super().__init__(initial_list)
+        self.options = options
+        self.list_element = list_element
+
+    def __getitem__(self, i):
+        return self.data[i]
+
+class PBcoreTitle(PBcoreList):
+    def __init__(self, options, list_element):
+        super().__init__(options, list_element)
 
     def makeXML():
         pass
 
-class PBcoreDescription(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcoreDescription(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
-class PBcoreDate(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcoreDate(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
-class PBcoreCreator(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcoreCreator(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
-class PBcorePublisher(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcorePublisher(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
-class PBcoreContributor(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcoreContributor(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
-class PBcoreCoverage(PBcoreElement):
-    allobj = []
-    def __init__(self, attribute, text):
-        super().__init__(attribute, text)
+# class PBcoreCoverage(PBcoreElement):
+#     allobj = []
+#     def __init__(self, attribute, text):
+#         super().__init__(attribute, text)
 
-    def makeXML():
-        pass
+#     def makeXML():
+#         pass
 
 ### language
 

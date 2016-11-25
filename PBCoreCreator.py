@@ -12,6 +12,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
+        self.titles = PBcoreTitle(config["title"]["values"], self.title_list)
+
         ###############
         ##### set up signals/slots
         ###############
@@ -23,20 +25,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##### GUI elements
 
         ## "add" buttons
-        self.description_addbutton.clicked.connect(
-            lambda: self.genericInputbox("description", self.description_list, PBcoreDescription))
         self.title_addbutton.clicked.connect(
-            lambda: self.genericInputbox("title", self.title_list, PBcoreTitle))
-        self.date_addbutton.clicked.connect(
-            lambda: self.genericInputbox("date", self.date_list, PBcoreDate))
-        self.coverage_addbutton.clicked.connect(
-            lambda: self.genericInputbox("coverage", self.coverage_list, PBcoreCoverage))
-        self.creator_addbutton.clicked.connect(
-            lambda: self.genericInputbox("creator", self.creator_list, PBcoreCreator))
-        self.contributor_addbutton.clicked.connect(
-            lambda: self.genericInputbox("creator", self.contributor_list, PBcoreContributor))
-        self.publisher_addbutton.clicked.connect(
-            lambda: self.genericInputbox("publisher", self.publisher_list, PBcorePublisher))
+            lambda: self.genericInputbox(self.titles))
+
+        # self.description_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("description", self.description_list, PBcoreDescription))
+        # self.date_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("date", self.date_list, PBcoreDate))
+        # self.coverage_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("coverage", self.coverage_list, PBcoreCoverage))
+        # self.creator_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("creator", self.creator_list, PBcoreCreator))
+        # self.contributor_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("creator", self.contributor_list, PBcoreContributor))
+        # self.publisher_addbutton.clicked.connect(
+        #     lambda: self.genericInputbox("publisher", self.publisher_list, PBcorePublisher))
 
         # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
         # language
@@ -44,18 +47,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ## "remove" buttons
         ### ????
+        self.title_removebutton.clicked.connect(
+            lambda: self.debugdump(self.titles))
    
         ## forget about the up/down arrows for now (maybe forever)
 
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
-    def genericInputbox(self, type, listbox, dataclass):
+    def debugdump(self, listobj):
+        print(len(listobj))
+
+    def genericInputbox(self, listobj):
         from itertools import groupby
 
-        dlg = StartGenericInputbox(type)
+        dlg = StartGenericInputbox()
 
-        all_attributes = config[type]["values"]
+        all_attributes = listobj.options
 
         # deal with end delimiter
         attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
@@ -74,13 +82,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if dlg.exec_():
             input = dlg.getValues()
-            data = dataclass(input["attribute"], input["text"])
+            data = PBcoreElement(input["attribute"], input["text"])
+            listbox = listobj.list_element
             listbox.addItem(str(data))
+            listobj.append(data)
         else:
             return
 
 class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
-    def __init__(self, type=None, parent=None):
+    def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
 
