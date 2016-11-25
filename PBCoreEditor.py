@@ -11,7 +11,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
-        self.widget_adapter = {
+        self.widget_adapter = {  # MOVE THESE TO SIGNAL/SLOT SETUP
             "title": self.title_list,
             "description": self.description_list,
             "date": self.date_list,
@@ -31,14 +31,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### GUI elements
 
-        self.description_addbutton.clicked.connect(lambda: self.genericInputbox("description"))
+        ## "add" buttons
+        self.description_addbutton.clicked.connect(lambda: self.genericInputbox("description", self.description_list, ))
         self.title_addbutton.clicked.connect(lambda: self.genericInputbox("title"))
-        self.date_addbutton.clicked.connect(lambda: self.genericInputbox("date"))
         self.coverage_addbutton.clicked.connect(lambda: self.genericInputbox("coverage"))
         self.creator_addbutton.clicked.connect(lambda: self.genericInputbox("creator"))
+        self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox("creator")) # reuse the list
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox("publisher"))
-        self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox("contributor"))
+
+        # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
+        self.date_addbutton.clicked.connect(lambda: self.genericInputbox("date"))
         self.rights_addbutton.clicked.connect(lambda: self.genericInputbox("rights"))
+
+
+        ## "remove" buttons
+        ### ????
+   
+        ## forget about the up/down arrows for now (maybe forever)
+
+        # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
     def genericInputbox(self, type):
@@ -63,7 +74,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             this_list = attributes.pop()
             dlg.attribute.addItems(this_list)
 
-        if ("presets" in config[type]):
+        if ("presets" in config[type]):  # don't need this...
             dlg.preset.addItems(config[type]["presets"])
         else:
             dlg.preset.setEnabled(False) # would be nicer if it just vanished...
