@@ -1,4 +1,5 @@
 import sys
+from xml.etree import ElementTree as ET
 from PBCoreElements import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from mainwindow import Ui_MainWindow
@@ -26,7 +27,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### menu items
 
-        # self.ui.actionWhat.triggered.connect(self.what)
+        self.actionExport.triggered.connect(self.export)
 
         ##### GUI elements
 
@@ -52,6 +53,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
+
+    def export(self):
+        root = ET.Element("pbcore:pbcoreDescriptionDocument")
+        root.set("xmlns:pbcore", "http://www.pbcore.org/PBCore/PBCoreNamespace.html")
+        root.set("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
+        root.set("xmlns:premis", "http://www.loc.gov/standards/premis/v2")
+        root.set("xsi:schemaLocation", "http://www.pbcore.org/PBCore/PBCoreNamespace.html http://pbcore.org/xsd/pbcore-2.0.xsd http://www.loc.gov/standards/premis/v2 http://www.loc.gov/standards/premis/v2/premis-v2-2.xsd")
+
+        root.extend(self.titles.makeXML())
+        root.extend(self.descriptions.makeXML())
+        root.extend(self.dates.makeXML())
+        root.extend(self.creators.makeXML())
+        
+        print(ET.tostring(root))
 
     def debugdump(self, listobj):
         print(listobj.makeXML())
