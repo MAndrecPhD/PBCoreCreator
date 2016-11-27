@@ -3,8 +3,6 @@ from xml.etree import ElementTree as ET
 from xml.dom import minidom
 
 def prettify(elem):
-    """Return a pretty-printed XML string for the Element.
-    """
     rough_string = ET.tostring(elem, 'utf-8')
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent="  ")
@@ -92,21 +90,48 @@ class PBcorePublisher(PBcoreList):
         super().__init__(options, list_element)
 
     def makeXML(self):
-        pass
+        out = []
+        for a in self:
+            a_xml = ET.Element("pbcore:pbcorePublisher")
+            creator = ET.SubElement(a_xml, "pbcore:publisher")
+            creator.text = a.text
+            creatorrole = ET.SubElement(a_xml, "pbcore:publisherRole")
+            creatorrole.text = a.attribute
+            out.append(a_xml)
+            
+        return(out)
 
 class PBcoreContributor(PBcoreList):
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
     def makeXML(self):
-        pass
+        out = []
+        for a in self:
+            a_xml = ET.Element("pbcore:pbcoreContributor")
+            creator = ET.SubElement(a_xml, "pbcore:contributor")
+            creator.text = a.text
+            creatorrole = ET.SubElement(a_xml, "pbcore:contributorRole")
+            creatorrole.text = a.attribute
+            out.append(a_xml)
+            
+        return(out)
 
 class PBcoreCoverage(PBcoreList):
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
     def makeXML(self):
-        pass
+        out = []
+        for a in self:
+            a_xml = ET.Element("pbcore:pbcoreCoverage")
+            creator = ET.SubElement(a_xml, "pbcore:coverage")
+            creator.text = a.text
+            creatorrole = ET.SubElement(a_xml, "pbcore:coverageType")
+            creatorrole.text = a.attribute
+            out.append(a_xml)
+            
+        return(out)
 
 class PBcoreLanguage:
     pass

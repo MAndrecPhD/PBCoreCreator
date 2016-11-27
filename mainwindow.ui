@@ -97,6 +97,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="title_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -142,6 +145,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="description_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -187,6 +193,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="date_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -232,6 +241,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="coverage_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -277,6 +289,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="language_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -335,6 +350,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="creator_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -380,6 +398,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="publisher_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -425,6 +446,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="contributor_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -470,6 +494,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="rights_removebutton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -578,7 +605,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="analog_premis_list"/>
+             <widget class="QListWidget" name="analogpremis_list"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -591,6 +618,9 @@
               </item>
               <item>
                <widget class="QToolButton" name="analogpremis_removebutton">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -856,6 +886,9 @@
               </item>
               <item>
                <widget class="QToolButton" name="digitalinstantiation_removebutton">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>Remove</string>
                 </property>

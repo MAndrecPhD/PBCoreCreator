@@ -13,6 +13,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
+        ###############
+        ##### create element objects
+        ###############
+
         self.titles = PBcoreTitle(config["title"]["values"], self.title_list)
         self.descriptions = PBcoreDescription(config["description"]["values"], self.description_list)
         self.dates = PBcoreDate(config["date"]["values"], self.date_list)
@@ -21,9 +25,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.contributors = PBcoreContributor(config["creator"]["values"], self.contributor_list)
         self.publishers = PBcorePublisher(config["publisher"]["values"], self.publisher_list)
 
+
         ###############
         ##### set up signals/slots
         ###############
+
+        # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: language, rights
+
+        ##### enable/disable "remove" buttons
+
+        self.title_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.title_list, self.title_removebutton))
+        self.description_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.description_list, self.description_removebutton))
+        self.date_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.date_list, self.date_removebutton))
+        self.coverage_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.coverage_list, self.coverage_removebutton))
+        self.creator_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.creator_list, self.creator_removebutton))
+        self.contributor_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.contributor_list, self.contributor_removebutton))
+        self.publisher_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.publisher_list, self.publisher_removebutton))
+        self.title_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.title_list, self.title_removebutton))
+        self.language_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.languag_list, self.language_removebutton))
+        self.rights_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.rights_list, self.rights_removebutton))
+        self.analogpremis_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.analogpremis_list, self.analogpremis_removebutton))
+        self.digitalinstantiation_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.digitalinstantiation_list, self.digitalinstantiation_removebutton))
 
         ##### menu items
 
@@ -39,18 +61,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creator_addbutton.clicked.connect(lambda: self.genericInputbox(self.creators))
         self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox(self.contributors))
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
-
-        # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS
         # language
         # rights
 
         ## "remove" buttons
-        ### ????
-        self.title_removebutton.clicked.connect(
-            lambda: self.debugdump(self.titles))
+        self.title_removebutton.clicked.connect(lambda: self.removeElement(self.titles))
+        self.description_removebutton.clicked.connect(lambda: self.removeElement(self.descriptions))
+        self.date_removebutton.clicked.connect(lambda: self.removeElement(self.dates))
+        self.coverage_removebutton.clicked.connect(lambda: self.removeElement(self.coverages))
+        self.creator_removebutton.clicked.connect(lambda: self.removeElement(self.creators))
+        self.contributor_removebutton.clicked.connect(lambda: self.removeElement(self.contributors))
+        self.publisher_removebutton.clicked.connect(lambda: self.removeElement(self.publishers))
+        # language
+        # rights
    
-        ## forget about the up/down arrows for now (maybe forever)
-
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
 
@@ -64,12 +88,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         root.extend(self.titles.makeXML())
         root.extend(self.descriptions.makeXML())
         root.extend(self.dates.makeXML())
+        root.extend(self.coverages.makeXML())
         root.extend(self.creators.makeXML())
+        root.extend(self.contributors.makeXML())
+        root.extend(self.publishers.makeXML())
         
         print(ET.tostring(root))
-
-    def debugdump(self, listobj):
-        print(listobj.makeXML())
 
     def genericInputbox(self, listobj):
         from itertools import groupby
@@ -101,6 +125,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             listobj.append(data)
         else:
             return
+
+    def removeButtonToggle(self, listbox, button):
+        if len(listbox.selectedItems()) > 0:
+            button.setEnabled(True)
+        else:
+            button.setEnabled(False)
+
+
+    def removeElement(self, listobj):
+        listbox = listobj.list_element
+        current_item = listbox.currentItem()
+        current_row = listbox.row(current_item)
+        del listobj[current_row]
+        listbox.takeItem(current_row)
+
 
 class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
     def __init__(self, parent=None):
