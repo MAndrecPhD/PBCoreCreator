@@ -1,4 +1,4 @@
-all: mainwindow analogpremis generic
+all: mainwindow analogpremis generic rights
 
 mainwindow: mainwindow.ui
 	pyuic5 mainwindow.ui -o mainwindow.py
@@ -8,3 +8,6 @@ generic: genericInputbox.ui
 
 analogpremis: analogpremis.ui
 	pyuic5 analogpremis.ui -o analogpremis.py
+
+rights: rightsInputbox.ui
+	pyuic5 rightsInputbox.ui -o rightsInputbox.py

@@ -17,13 +17,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##### create element objects
         ###############
 
-        self.titles = PBcoreTitle(config["title"]["values"], self.title_list)
-        self.descriptions = PBcoreDescription(config["description"]["values"], self.description_list)
-        self.dates = PBcoreDate(config["date"]["values"], self.date_list)
-        self.coverages = PBcoreCoverage(config["coverage"]["values"], self.coverage_list)
-        self.creators = PBcoreCreator(config["creator"]["values"], self.creator_list)
-        self.contributors = PBcoreContributor(config["creator"]["values"], self.contributor_list)
-        self.publishers = PBcorePublisher(config["publisher"]["values"], self.publisher_list)
+        self.titles = PBcoreTitle(config["title"], self.title_list)
+        self.descriptions = PBcoreDescription(config["description"], self.description_list)
+        self.dates = PBcoreDate(config["date"], self.date_list)
+        self.coverages = PBcoreCoverage(config["coverage"], self.coverage_list)
+        self.creators = PBcoreCreator(config["creator"], self.creator_list)
+        self.contributors = PBcoreContributor(config["creator"], self.contributor_list)
+        self.publishers = PBcorePublisher(config["publisher"], self.publisher_list)
 
 
         ###############
