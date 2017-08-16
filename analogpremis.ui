@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>AnalogpremisInputbox</class>
+ <widget class="QDialog" name="AnalogpremisInputbox">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -33,18 +33,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="analogevent_type">
-        <item>
-         <property name="text">
-          <string>Physical repair</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Rehousing</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QComboBox" name="analogevent_type"/>
       </item>
      </layout>
     </item>
@@ -90,18 +79,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="analogevent_agent">
-        <item>
-         <property name="text">
-          <string>Andrec, Michael</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Doe, John</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QComboBox" name="analogevent_agent"/>
       </item>
      </layout>
     </item>
@@ -117,25 +95,13 @@
     </item>
    </layout>
   </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>label_2</zorder>
-  <zorder>analogevent_date</zorder>
-  <zorder>analogevent_details</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
-  <zorder>analogevent_type</zorder>
-  <zorder>label_5</zorder>
-  <zorder>analogevent_agent</zorder>
-  <zorder>analogevent_details</zorder>
-  <zorder>analogevent_agent</zorder>
-  <zorder>analogevent_details</zorder>
  </widget>
  <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>AnalogpremisInputbox</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -151,7 +117,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>AnalogpremisInputbox</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

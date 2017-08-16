@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="descMD">
        <attribute name="title">
@@ -305,12 +305,6 @@
          </layout>
         </item>
        </layout>
-       <zorder>layoutWidget</zorder>
-       <zorder>layoutWidget</zorder>
-       <zorder>layoutWidget</zorder>
-       <zorder>layoutWidget_2</zorder>
-       <zorder>layoutWidget_3</zorder>
-       <zorder>layoutWidget_4</zorder>
       </widget>
       <widget class="QWidget" name="rightsMD">
        <attribute name="title">
@@ -525,23 +519,7 @@
            <item row="0" column="0">
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QComboBox" name="analog_type">
-               <item>
-                <property name="text">
-                 <string>1/4&quot; open reel</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Cassette</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Microcassette</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="analog_type"/>
              </item>
              <item>
               <layout class="QFormLayout" name="formLayout">
@@ -736,6 +714,11 @@
               <widget class="QComboBox" name="comboBox">
                <item>
                 <property name="text">
+                 <string>Unknown</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string>Acetate</string>
                 </property>
                </item>
@@ -746,7 +729,7 @@
                </item>
                <item>
                 <property name="text">
-                 <string>Unknown</string>
+                 <string>Paper</string>
                 </property>
                </item>
                <item>
