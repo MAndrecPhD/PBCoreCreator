@@ -39,6 +39,11 @@ class PBcoreList(UserList):
     def __getitem__(self, i):
         return self.data[i]
 
+class PremisList(UserList):
+    def __init__(self, list_element, initial_list=[]):
+        super().__init__(initial_list)
+        self.list_element = list_element
+
 
 class PBcoreTitle(PBcoreList):
     def __init__(self, options, list_element):
@@ -152,9 +157,9 @@ class PBcoreLanguage:
 class PBcoreRights:
     pass
 
-class AnalogPremis(list):
-    def __init__(self, initial_list=[]):
-        super().__init__(initial_list)
+class AnalogPremis(PremisList):
+    def __init__(self, list_element):
+        super().__init__(list_element)
 
     def makeXML(self):
         pass

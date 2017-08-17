@@ -26,7 +26,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creators = PBcoreCreator(config["creator"], self.creator_list)
         self.contributors = PBcoreContributor(config["creator"], self.contributor_list)
         self.publishers = PBcorePublisher(config["publisher"], self.publisher_list)
-        self.analogpremis = AnalogPremis()
+        self.analogpremis = AnalogPremis(self.analogpremis_list)
 
         ###############
         ##### set up signals/slots
@@ -65,7 +65,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
         # language
         # rights
-        self.analogpremis_addbutton.clicked.connect(lambda: self.analogPremisInputbox(self.analogpremis_list, self.analogpremis))
+        self.analogpremis_addbutton.clicked.connect(lambda: self.analogPremisInputbox(self.analogpremis))
 
         ## "remove" buttons
         self.title_removebutton.clicked.connect(lambda: self.removeElement(self.titles))
@@ -77,6 +77,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.publisher_removebutton.clicked.connect(lambda: self.removeElement(self.publishers))
         # language
         # rights
+        self.analogpremis_removebutton.clicked.connect(lambda: self.removeElement(self.analogpremis))
    
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
@@ -146,7 +147,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             return
 
-    def analogPremisInputbox(self, list_element, listobj):
+    def analogPremisInputbox(self, listobj):
         dlg = StartPremisInputbox()
 
         dlg.analogevent_type.addItems(config["analogpremisevent"])
@@ -155,7 +156,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if dlg.exec_():
             input = dlg.getValues()
             data = PremisEvent(input["type"], input["date"], input["details"], input["agent"])
-            list_element.addItem(str(data))
+            listbox = listobj.list_element
+            listbox.addItem(str(data))
             listobj.append(data)
         else:
             return
