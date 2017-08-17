@@ -4,6 +4,8 @@ from PBCoreElements import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from mainwindow import Ui_MainWindow
 from genericInputbox import Ui_GenericInputbox
+from analogpremis import Ui_AnalogpremisInputbox
+from itertools import groupby
 
 config = None
 
@@ -24,7 +26,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creators = PBcoreCreator(config["creator"], self.creator_list)
         self.contributors = PBcoreContributor(config["creator"], self.contributor_list)
         self.publishers = PBcorePublisher(config["publisher"], self.publisher_list)
-
+        self.analogpremis = AnalogPremis()
 
         ###############
         ##### set up signals/slots
@@ -63,6 +65,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
         # language
         # rights
+        self.analogpremis_addbutton.clicked.connect(lambda: self.analogPremisInputbox(self.analogpremis_list, self.analogpremis))
 
         ## "remove" buttons
         self.title_removebutton.clicked.connect(lambda: self.removeElement(self.titles))
@@ -77,6 +80,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
    
         # deal with double clicks on list boxes
         # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
+
+        ## populate analog instance menu
+        all_attributes = config["instantiationPhysical"]
+
+        # deal with end delimiter
+        attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
+
+        # deal with separators
+        attributes = [list(group) for k, group in groupby(attributes, lambda x: x == "-") if not k]
+        attributes = attributes[::-1]
+
+        this_list = attributes.pop()
+        self.analog_type.addItems(this_list)
+
+        while (len(attributes) > 0):
+            self.analog_type.insertSeparator(self.analog_type.count())
+            this_list = attributes.pop()
+            self.analog_type.addItems(this_list)
+
 
     def export(self):
         root = ET.Element("pbcore:pbcoreDescriptionDocument")
@@ -96,8 +118,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(ET.tostring(root))
 
     def genericInputbox(self, listobj):
-        from itertools import groupby
-
         dlg = StartGenericInputbox()
 
         all_attributes = listobj.options
@@ -126,6 +146,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             return
 
+    def analogPremisInputbox(self, list_element, listobj):
+        dlg = StartPremisInputbox()
+
+        dlg.analogevent_type.addItems(config["analogpremisevent"])
+        dlg.analogevent_agent.addItems(config["agent"])
+
+        if dlg.exec_():
+            input = dlg.getValues()
+            data = PremisEvent(input["type"], input["date"], input["details"], input["agent"])
+            list_element.addItem(str(data))
+            listobj.append(data)
+        else:
+            return
+
     def removeButtonToggle(self, listbox, button):
         if len(listbox.selectedItems()) > 0:
             button.setEnabled(True)
@@ -149,6 +183,16 @@ class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
     def getValues(self):
         return {"attribute": str(self.attribute.currentText()), "text": self.text.toPlainText()}
 
+class StartPremisInputbox(QtWidgets.QDialog, Ui_AnalogpremisInputbox):
+    def __init__(self, parent=None):
+        QtWidgets.QDialog.__init__(self, parent)
+        self.setupUi(self)
+
+    def getValues(self):
+        return {"type": str(self.analogevent_type.currentText()), 
+                    "date": self.analogevent_date.text(),
+                    "details": self.analogevent_details.toPlainText(),
+                    "agent": self.analogevent_agent.currentText()}
 
 if __name__ == "__main__":
     import json

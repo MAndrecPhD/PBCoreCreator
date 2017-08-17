@@ -24,6 +24,7 @@ class Ui_AnalogpremisInputbox(object):
         self.label_4.setObjectName("label_4")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_4)
         self.analogevent_type = QtWidgets.QComboBox(self.layoutWidget)
+        self.analogevent_type.setEditable(True)
         self.analogevent_type.setObjectName("analogevent_type")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.analogevent_type)
         self.verticalLayout.addLayout(self.formLayout)

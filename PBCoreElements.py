@@ -18,6 +18,18 @@ class PBcoreElement:
     def __str__(self):
         return self.display
 
+class PremisEvent:
+    def __init__(self, type, date, details, agent):
+        self.type = type
+        self.date = date
+        self.details = details
+        self.agent = agent
+        self.display = "{}: {}".format(date, type)
+        self.display = (self.display[:45] + '...') if len(self.display) > 45 else self.display
+
+    def __str__(self):
+        return self.display
+
 class PBcoreList(UserList):
     def __init__(self, options, list_element, initial_list=[]):
         super().__init__(initial_list)
@@ -26,6 +38,7 @@ class PBcoreList(UserList):
 
     def __getitem__(self, i):
         return self.data[i]
+
 
 class PBcoreTitle(PBcoreList):
     def __init__(self, options, list_element):
@@ -139,16 +152,18 @@ class PBcoreLanguage:
 class PBcoreRights:
     pass
 
-class PBcore_AnalogPremis:
+class AnalogPremis(list):
+    def __init__(self, initial_list=[]):
+        super().__init__(initial_list)
+
+    def makeXML(self):
+        pass
+
+class DigitalPremis:
     def __init__(self):
         pass
 
-class PBCore_DigitalPremis:
+
+class PBcoreDigitalInst:
     def __init__(self):
         pass
-
-
-class PBcore_DigitalInst:
-    def __init__(self):
-        pass
-
