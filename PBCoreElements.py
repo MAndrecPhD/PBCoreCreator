@@ -9,8 +9,9 @@ def prettify(elem):
 
 
 class PBcoreElement:
-    def __init__(self, attribute, text):
+    def __init__(self, attribute, attribute_index, text):
         self.attribute = attribute
+        self.attribute_index = attribute_index
         self.text = text
         self.display = "[{}] {}".format(attribute, text.replace('\n', ' ').replace('\r', ''))
         self.display = (self.display[:45] + '...') if len(self.display) > 45 else self.display

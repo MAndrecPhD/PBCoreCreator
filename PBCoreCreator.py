@@ -43,8 +43,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creator_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.creator_list, self.creator_removebutton))
         self.contributor_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.contributor_list, self.contributor_removebutton))
         self.publisher_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.publisher_list, self.publisher_removebutton))
-        self.title_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.title_list, self.title_removebutton))
-        self.language_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.languag_list, self.language_removebutton))
+        self.language_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.language_list, self.language_removebutton))
         self.rights_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.rights_list, self.rights_removebutton))
         self.analogpremis_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.analogpremis_list, self.analogpremis_removebutton))
         self.digitalinstantiation_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.digitalinstantiation_list, self.digitalinstantiation_removebutton))
@@ -81,6 +80,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
    
         # deal with double clicks on list boxes
         self.title_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.titles))
+        self.description_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.descriptions))
+        self.date_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.dates))
+        self.coverage_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.coverages))
+        self.creator_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.creators))
+        self.contributor_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.contributors))
+        self.publisher_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.publishers))
+        #self.language_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.languag_list, self.language_removebutton))
+        #self.rights_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.rights_list, self.rights_removebutton))
+
 
         ## populate analog instance menu
         buildMenu(config["instantiationPhysical"], self.analog_type)
@@ -105,12 +113,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def genericInputbox(self, listobj):
         dlg = StartGenericInputbox()
-
         buildMenu(listobj.options, dlg.attribute)
 
         if dlg.exec_():
             input = dlg.getValues()
-            data = PBcoreElement(input["attribute"], input["text"])
+            data = PBcoreElement(input["attribute"], input["attribute-index"], input["text"])
             listbox = listobj.list_element
             listbox.addItem(str(data))
             listobj.append(data)
@@ -138,7 +145,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             button.setEnabled(False)
 
-
     def removeElement(self, listobj):
         listbox = listobj.list_element
         current_item = listbox.currentItem()
@@ -150,11 +156,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         listbox = listobj.list_element
         current_item = listbox.currentItem()
         current_row = listbox.row(current_item)
-        attribute = listobj[current_row].attribute
-        text = listobj[current_row].text
 
-        # display generic input box with elements set to current values
-        # save returned values
+        dlg = StartGenericInputbox()
+        buildMenu(listobj.options, dlg.attribute)
+
+        # set dialog objects to current values
+        dlg.text.document().setPlainText(listobj[current_row].text)
+        dlg.attribute.setCurrentIndex(listobj[current_row].attribute_index)
+
+        if dlg.exec_():
+            input = dlg.getValues()
+            data = PBcoreElement(input["attribute"], input["attribute-index"], input["text"])
+            listobj[current_row] = data
+            # update the current_item in the QListWidget
+        else:
+            return
 
 def buildMenu(all_attributes, menu_object):
     # deal with end delimiter
@@ -179,7 +195,9 @@ class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
         self.setupUi(self)
 
     def getValues(self):
-        return {"attribute": str(self.attribute.currentText()), "text": self.text.toPlainText()}
+        return {"attribute": str(self.attribute.currentText()), 
+                "attribute-index": self.attribute.currentIndex(),
+                "text": self.text.toPlainText()}
 
 class StartPremisInputbox(QtWidgets.QDialog, Ui_AnalogpremisInputbox):
     def __init__(self, parent=None):
