@@ -80,7 +80,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.analogpremis_removebutton.clicked.connect(lambda: self.removeElement(self.analogpremis))
    
         # deal with double clicks on list boxes
-        # self.ui.tophit_list.itemDoubleClicked.connect(self.clickAssign)
+        self.title_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.titles))
 
         ## populate analog instance menu
         all_attributes = config["instantiationPhysical"]
@@ -175,6 +175,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         current_row = listbox.row(current_item)
         del listobj[current_row]
         listbox.takeItem(current_row)
+
+    def editPBcoreElement(self, listobj):
+        listbox = listobj.list_element
+        current_item = listbox.currentItem()
+        current_row = listbox.row(current_item)
+        attribute = listobj[current_row].attribute
+        text = listobj[current_row].text
+
+        # display generic input box with elements set to current values
+        # save returned values
 
 
 class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
