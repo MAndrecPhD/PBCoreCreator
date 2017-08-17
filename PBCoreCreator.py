@@ -83,22 +83,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.title_list.itemDoubleClicked.connect(lambda: self.editPBcoreElement(self.titles))
 
         ## populate analog instance menu
-        all_attributes = config["instantiationPhysical"]
-
-        # deal with end delimiter
-        attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
-
-        # deal with separators
-        attributes = [list(group) for k, group in groupby(attributes, lambda x: x == "-") if not k]
-        attributes = attributes[::-1]
-
-        this_list = attributes.pop()
-        self.analog_type.addItems(this_list)
-
-        while (len(attributes) > 0):
-            self.analog_type.insertSeparator(self.analog_type.count())
-            this_list = attributes.pop()
-            self.analog_type.addItems(this_list)
+        buildMenu(config["instantiationPhysical"], self.analog_type)
 
 
     def export(self):
@@ -121,22 +106,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def genericInputbox(self, listobj):
         dlg = StartGenericInputbox()
 
-        all_attributes = listobj.options
-
-        # deal with end delimiter
-        attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
-
-        # deal with separators
-        attributes = [list(group) for k, group in groupby(attributes, lambda x: x == "-") if not k]
-        attributes = attributes[::-1]
-
-        this_list = attributes.pop()
-        dlg.attribute.addItems(this_list)
-
-        while (len(attributes) > 0):
-            dlg.attribute.insertSeparator(dlg.attribute.count())
-            this_list = attributes.pop()
-            dlg.attribute.addItems(this_list)
+        buildMenu(listobj.options, dlg.attribute)
 
         if dlg.exec_():
             input = dlg.getValues()
@@ -185,6 +155,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # display generic input box with elements set to current values
         # save returned values
+
+def buildMenu(all_attributes, menu_object):
+    # deal with end delimiter
+    attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
+
+    # deal with separators
+    attributes = [list(group) for k, group in groupby(attributes, lambda x: x == "-") if not k]
+    attributes = attributes[::-1]
+
+    this_list = attributes.pop()
+    menu_object.addItems(this_list)
+
+    while (len(attributes) > 0):
+        menu_object.insertSeparator(menu_object.count())
+        this_list = attributes.pop()
+        menu_object.addItems(this_list)
 
 
 class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
