@@ -1,3 +1,9 @@
+"""PBCore Creator - a GUI tool for creating and managing PBCore metadata
+
+Requires python 3 and PyQT5
+
+"""
+
 import sys
 from xml.etree import ElementTree as ET
 from PBCoreElements import *
@@ -10,14 +16,26 @@ from itertools import groupby
 config = None
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+
+    """Setup and display of main window
+
+    """
+
     def __init__(self, parent=None):
+        """Start up and configure
+
+        Open window
+        Create objects for elements
+        Set up signals and slots
+
+        """
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
-        ###############
         ##### create element objects
-        ###############
+
+        # the first argument to 
 
         self.titles = PBcoreTitle(config["title"], self.title_list)
         self.descriptions = PBcoreDescription(config["description"], self.description_list)
@@ -28,13 +46,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.publishers = PBcorePublisher(config["publisher"], self.publisher_list)
         self.analogpremis = AnalogPremis(self.analogpremis_list)
 
-        ###############
         ##### set up signals/slots
-        ###############
 
         # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: language, rights
 
-        ##### enable/disable "remove" buttons
+        ## enable/disable "remove" buttons
 
         self.title_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.title_list, self.title_removebutton))
         self.description_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.description_list, self.description_removebutton))
@@ -48,13 +64,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.analogpremis_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.analogpremis_list, self.analogpremis_removebutton))
         self.digitalinstantiation_list.itemSelectionChanged.connect(lambda: self.removeButtonToggle(self.digitalinstantiation_list, self.digitalinstantiation_removebutton))
 
-        ##### menu items
+        ## menu items
 
         self.actionExport.triggered.connect(self.export)
 
-        ##### GUI elements
+        ## GUI elements
 
-        ## "add" buttons
+        # "add" buttons
+
         self.title_addbutton.clicked.connect(lambda: self.genericInputbox(self.titles))
         self.description_addbutton.clicked.connect(lambda: self.genericInputbox(self.descriptions))
         self.date_addbutton.clicked.connect(lambda: self.genericInputbox(self.dates))
@@ -91,6 +108,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
         ## populate analog instance menu
+        
         buildMenu(config["instantiationPhysical"], self.analog_type)
 
 
