@@ -9,6 +9,15 @@ def prettify(elem):
 
 
 class PBcoreElement:
+
+    """The base class for storing all PBCore element metadata.
+
+    Objects of this class are used as elements of the PBcoreList class.
+    The class provides for an attribute/text pair, and also stores a "display"
+    version of the contents that is suitable for display in a QListWidget
+
+    """
+
     def __init__(self, attribute, attribute_index, text):
         self.attribute = attribute
         self.attribute_index = attribute_index
@@ -20,6 +29,16 @@ class PBcoreElement:
         return self.display
 
 class PremisEvent:
+
+    """The base class for storing all Premis event metadata.
+
+    Objects of this class are used as elements of the PremisList class.
+    The class provides for storage of event type, date, agent, and details.
+    It also stores a "display" version of the contents that is suitable for display 
+    in a QListWidget.
+
+    """
+
     def __init__(self, type, date, details, agent):
         self.type = type
         self.date = date
@@ -32,6 +51,11 @@ class PremisEvent:
         return self.display
 
 class PBcoreList(UserList):
+
+    """The base class for lists used to store (potentially) multi-valued PBCore element metadata
+
+    """
+
     def __init__(self, options, list_element, initial_list=[]):
         super().__init__(initial_list)
         self.options = options
@@ -41,12 +65,23 @@ class PBcoreList(UserList):
         return self.data[i]
 
 class PremisList(UserList):
+
+    """The base class for lists used to store (potentially) multi-valued Premis event metadata
+
+    """
+
     def __init__(self, list_element, initial_list=[]):
         super().__init__(initial_list)
         self.list_element = list_element
 
 
 class PBcoreTitle(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreTitle> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -61,6 +96,12 @@ class PBcoreTitle(PBcoreList):
         return(out)
 
 class PBcoreDescription(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreDescription> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -75,6 +116,12 @@ class PBcoreDescription(PBcoreList):
         return(out)
 
 class PBcoreDate(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreAssetDate> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -89,6 +136,12 @@ class PBcoreDate(PBcoreList):
         return(out)
 
 class PBcoreCreator(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreCreator> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -105,6 +158,12 @@ class PBcoreCreator(PBcoreList):
         return(out)
 
 class PBcorePublisher(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcorePublisher> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -121,6 +180,12 @@ class PBcorePublisher(PBcoreList):
         return(out)
 
 class PBcoreContributor(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreContributor> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -137,6 +202,12 @@ class PBcoreContributor(PBcoreList):
         return(out)
 
 class PBcoreCoverage(PBcoreList):
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreCoverage> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, options, list_element):
         super().__init__(options, list_element)
 
@@ -153,12 +224,30 @@ class PBcoreCoverage(PBcoreList):
         return(out)
 
 class PBcoreLanguage:
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreLanguage> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     pass
 
 class PBcoreRights:
+
+    """Child class of PBcoreList used for storing PBCore <pbcoreRights> elements
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     pass
 
 class AnalogPremis(PremisList):
+
+    """Child class of PremisList used for storing Premis events for analog objects
+
+    Provides a method for generating XML encoding of elements
+    """
+    
     def __init__(self, list_element):
         super().__init__(list_element)
 
@@ -166,10 +255,22 @@ class AnalogPremis(PremisList):
         pass
 
 class DigitalPremis:
+
+    """Child class of PremisList used for storing Premis events for digital objects
+
+    Provides a method for generating XML encoding of elements
+    """
+
     def __init__(self):
         pass
 
 
 class PBcoreDigitalInst:
+
+    """Class for storing metadata about PBCore digitial instatiations 
+
+    Provides a method for generating XML encoding of elements
+    """
+
     def __init__(self):
         pass

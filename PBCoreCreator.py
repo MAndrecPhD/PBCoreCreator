@@ -17,15 +17,15 @@ config = None
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
-    """Setup and display of main window
+    """Manages the setup and display of the main GUI window
 
     """
 
     def __init__(self, parent=None):
-        """Start up and configure
+        """Start up and configure the main window
 
         Open window
-        Create objects for elements
+        Create objects for the PBCore and Premis elements
         Set up signals and slots
 
         """
@@ -35,7 +35,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### create element objects
 
-        # the first argument to 
+        # The arguments are a list of options for dropdowns (except AnalogPremis), and the Qt widget
+        # being handled by that object. 
+
+        # The options list are eventually used by genericInputBox()
+        # to create the appropriate elements in the QComboBox selector
+
+        # The widget is used by ....
 
         self.titles = PBcoreTitle(config["title"], self.title_list)
         self.descriptions = PBcoreDescription(config["description"], self.description_list)
@@ -48,7 +54,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### set up signals/slots
 
-        # THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: language, rights
+        # TODO THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: language, rights
 
         ## enable/disable "remove" buttons
 
@@ -79,8 +85,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creator_addbutton.clicked.connect(lambda: self.genericInputbox(self.creators))
         self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox(self.contributors))
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
-        # language
-        # rights
+        # TODO language
+        # TODO rights
         self.analogpremis_addbutton.clicked.connect(lambda: self.analogPremisInputbox(self.analogpremis))
 
         ## "remove" buttons
@@ -91,8 +97,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creator_removebutton.clicked.connect(lambda: self.removeElement(self.creators))
         self.contributor_removebutton.clicked.connect(lambda: self.removeElement(self.contributors))
         self.publisher_removebutton.clicked.connect(lambda: self.removeElement(self.publishers))
-        # language
-        # rights
+        # TODO language
+        # TODO rights
         self.analogpremis_removebutton.clicked.connect(lambda: self.removeElement(self.analogpremis))
    
         # deal with double clicks on list boxes
@@ -113,6 +119,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def export(self):
+        """Function to handle export of PBCore and Premis XML for each element
+
+        Makes use of the makeXML methods of each element object
+
+        """
         root = ET.Element("pbcore:pbcoreDescriptionDocument")
         root.set("xmlns:pbcore", "http://www.pbcore.org/PBCore/PBCoreNamespace.html")
         root.set("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
@@ -130,6 +141,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(ET.tostring(root))
 
     def genericInputbox(self, listobj):
+        """Display and configure a generic input Qt dialog and perform a create operation
+        for list object element
+
+        This dialog is used for nearly all PBCore elements, but not for Premis events.
+
+        listobj: the element object corresponding to the desired input
+
+        The function uses the values in listobj.options to construct the QComboBox dropdown using the
+        buildMenu() function, and in response to an "ok" click creates a new PBcoreElement object
+        containing the returned attribute and value. This object is then appended to the listobj and 
+        added to the QListWidget stored in the list_element instance variable for the listobj.
+
+        """
         dlg = StartGenericInputbox()
         buildMenu(listobj.options, dlg.attribute)
 
@@ -143,6 +167,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return
 
     def analogPremisInputbox(self, listobj):
+        """Display and configure the Qt dialog for analog Premis events and perform a create operation
+        for list object element
+
+        Completely analogous to genericInputbox, except that there is an additional QComboBox dropdown
+        and additional arguments for the Premis agent and event date.
+
+        """
         dlg = StartPremisInputbox()
 
         dlg.analogevent_type.addItems(config["analogpremisevent"])
@@ -158,12 +189,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return
 
     def removeButtonToggle(self, listbox, button):
+        """Toggle the enabled state of a "remove" button
+
+        Enable "remove" button only if at least one item is selected in the corresponding QListWidget.
+
+        listbox: the QListWidget
+        button: the "remove" QToolButton the state of which should be toggled
+
+        """
         if len(listbox.selectedItems()) > 0:
             button.setEnabled(True)
         else:
             button.setEnabled(False)
 
     def removeElement(self, listobj):
+        """Perform a delete operation on a element list object
+
+        Queries the current selected item in the QListWidget specified
+        by the listobj argument, and deletes it from both the list object and the 
+        QListWidget.
+
+        """
         listbox = listobj.list_element
         current_item = listbox.currentItem()
         current_row = listbox.row(current_item)
@@ -171,6 +217,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         listbox.takeItem(current_row)
 
     def editPBcoreElement(self, listobj):
+        """Performs an update operation on an element list object
+
+        Uses the same generic input box as for the create operation
+
+        """
         listbox = listobj.list_element
         current_item = listbox.currentItem()
         current_row = listbox.row(current_item)
@@ -186,11 +237,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             input = dlg.getValues()
             data = PBcoreElement(input["attribute"], input["attribute-index"], input["text"])
             listobj[current_row] = data
-            # update the current_item in the QListWidget
+            # TODO: update the current_item in the QListWidget
         else:
             return
 
 def buildMenu(all_attributes, menu_object):
+    """Utility function to process and insert element list into a QComboBox dropdown
+
+    Processes settings from config file and builds element list for the dropdown.
+    Detects "#" and "-" in the config data, terminates the menu at the first occurence of "#"
+    and replaces "-" with separator elements.
+
+    all_attributes: list containing the raw elements from the config file
+    menu_object: the QComboBox widget to be configured
+
+    """
     # deal with end delimiter
     attributes = [list(group) for k, group in groupby(all_attributes, lambda x: x == "#") if not k][0]
 
@@ -208,6 +269,11 @@ def buildMenu(all_attributes, menu_object):
 
 
 class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
+
+    """Displays and gathers return valus for a generic input dialog
+
+    """
+
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
@@ -218,6 +284,11 @@ class StartGenericInputbox(QtWidgets.QDialog, Ui_GenericInputbox):
                 "text": self.text.toPlainText()}
 
 class StartPremisInputbox(QtWidgets.QDialog, Ui_AnalogpremisInputbox):
+
+    """Displays and gathers return valus for a Premis input dialog
+
+    """
+    
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
