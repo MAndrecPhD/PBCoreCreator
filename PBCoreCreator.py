@@ -33,6 +33,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.menuBar.setNativeMenuBar(False)
 
+        buildMenu(config["language"], self.language_choice)
+
         ##### create element objects
 
         # The arguments are a list of options for dropdowns (except AnalogPremis), and the Qt widget
@@ -41,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # The options list are eventually used by genericInputBox()
         # to create the appropriate elements in the QComboBox selector
 
-        # The widget is used by ....
+        # The widget is used by the CRUD functions to know which GUI element to update
 
         self.titles = PBcoreTitle(config["title"], self.title_list)
         self.descriptions = PBcoreDescription(config["description"], self.description_list)
@@ -54,7 +56,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ##### set up signals/slots
 
-        # TODO THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: language, rights
+        # TODO THESE NEED TO HAVE THEIR OWN SPECIAL DIALOGS: rights
 
         ## enable/disable "remove" buttons
 
@@ -85,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.creator_addbutton.clicked.connect(lambda: self.genericInputbox(self.creators))
         self.contributor_addbutton.clicked.connect(lambda: self.genericInputbox(self.contributors))
         self.publisher_addbutton.clicked.connect(lambda: self.genericInputbox(self.publishers))
-        # TODO language
+        #self.language_addbutton.clicked.connect()
         # TODO rights
         self.analogpremis_addbutton.clicked.connect(lambda: self.analogPremisInputbox(self.analogpremis))
 
@@ -237,7 +239,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             input = dlg.getValues()
             data = PBcoreElement(input["attribute"], input["attribute-index"], input["text"])
             listobj[current_row] = data
-            # TODO: update the current_item in the QListWidget
+            current_item.setText(str(data))
         else:
             return
 

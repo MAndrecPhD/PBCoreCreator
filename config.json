@@ -5,8 +5,9 @@
     ],
 
     "analogpremisevent": [
-        "Physical repair",
-        "Rehousing"
+        "Repair",
+        "Rehousing",
+        "Damage"
     ],
 
     "language": [
